@@ -274,8 +274,13 @@ public class MyArrayList<E> extends AbstractList<E> implements List<E> {
         return size == 0;
     }
 
+    /**
+     * 是否包含这个元素
+     * @param o 传入的元素
+     * @return 查找结果
+     */
     public boolean contains(Object o) {
-        return false;
+        return indexOf(0) >= 0;
     }
 
     public Iterator<E> iterator() {
@@ -286,8 +291,40 @@ public class MyArrayList<E> extends AbstractList<E> implements List<E> {
         return null;
     }
 
+    /**
+     * 移除指定的元素
+     *      先通过传入的元素找数组中是否存在，如果找到元素之后找到对应的下标，通过下标移除
+     * @param o 要移除的元素
+     * @return  是否移除成功
+     */
     public boolean remove(Object o) {
+        if(null == o) {
+            for (int index = 0; index < size; index++)
+                if (elementData[index] == null) {
+                    fastRemove(index);
+                    return true;
+                }
+        } else {
+            for (int index = 0; index < size; index++)
+                if (o.equals(elementData[index])) {
+                    fastRemove(index);
+                    return true;
+                }
+        }
         return false;
+    }
+
+    /**
+     * 移除指定位置的元素
+     * @param index 元素下标
+     */
+    private void fastRemove(int index) {
+        modCount++;
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                    numMoved);
+        elementData[--size] = null;
     }
 
     public boolean containsAll(Collection<?> c) {
@@ -334,12 +371,43 @@ public class MyArrayList<E> extends AbstractList<E> implements List<E> {
         return null;
     }
 
+    /**
+     * 根据下标移除元素
+     *      首先检验下标的合法性
+     *      然后通过System.arraycopy进行复制，将移除位置的后的元素统一往前移动
+     * @param index 移除下标
+     * @return 返回移除的元素
+     */
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+
+        modCount++;
+        E oldValue = elementData(index);
+
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                    numMoved);
+        elementData[--size] = null;
+        return oldValue;
     }
 
+    /**
+     * 返回给定元素的下标
+     * @param o 需要查找的元素
+     * @return 下标
+     */
     public int indexOf(Object o) {
-        return 0;
+        if(null == o) {
+            for (int i = 0; i < size; i++)
+                if (elementData[i]==null)
+                    return i;
+        } else {
+            for (int i = 0; i < size; i++)
+                if (o.equals(elementData[i]))
+                    return i;
+        }
+        return -1;
     }
 
     public int lastIndexOf(Object o) {
