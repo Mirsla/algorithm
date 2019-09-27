@@ -3,6 +3,8 @@ package com.alex.jdk8.methodreference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MethodReferenceTest2 {
 
@@ -37,9 +39,22 @@ public class MethodReferenceTest2 {
 //        list.forEach(System.out::println);
 
         // 第三种
-        List<String> cities = Arrays.asList("chengdu","beijing","chongqing", "shanghai","xizang");
-        Collections.sort(cities, String::compareToIgnoreCase);
-        cities.forEach(System.out::println);
+//        List<String> cities = Arrays.asList("chengdu","beijing","chongqing", "shanghai","xizang");
+//        Collections.sort(cities, String::compareToIgnoreCase);
+//        cities.forEach(System.out::println);
 
+        //第四种
+        MethodReferenceTest2 test = new MethodReferenceTest2();
+        System.out.println(test.getString(String::new));
+        System.out.println(test.getString2("hhhh",String::new));
+
+    }
+
+    public String getString(Supplier<String> supplier) {
+        return supplier.get() + "test";
+    }
+
+    public String getString2(String str, Function<String, String> function) {
+        return function.apply(str);
     }
 }
