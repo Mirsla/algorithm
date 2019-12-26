@@ -16,11 +16,11 @@ import java.util.Arrays;
 public class RemoveDuplicates {
 
     public static void main(String[] args) {
-        int nums[] = new int[]{1,1,2};
-        System.out.println(removeDuplicates(nums));
+//        int nums[] = new int[]{1,1,2};
+//        System.out.println(removeDuplicates(nums));
 
-        nums = new int[]{7,1,5,3,6,4};
-        System.out.println(maxProfit3(nums));
+        int nums[] = new int[]{3,3,5,0,0,3,1,4};
+        System.out.println(maxProfit4(nums));
     }
 
     private static int removeDuplicates(int[] nums) {
@@ -177,27 +177,37 @@ public class RemoveDuplicates {
      * @param prices
      * @return
      */
-    public int maxProfit(int[] prices) {
+    private static int maxProfit4(int[] prices) {
         if(prices.length == 0) {
             return 0;
         }
         int left = 0, right = 1;
         int max = 0;
-        int[] sums =new int[prices.length];
+        int max2 = 0;
         int sum = 0;
         while (right < prices.length) {
             if(prices[right] - prices[left] > 0) {
                 sum = sum + prices[right] - prices[left];
             } else {
-                sums[left] = sum;
+                if(sum > max) {
+                    max2 = max;
+                    max = sum;
+                } else if(sum > max2) {
+                    max2 = sum;
+                }
                 sum = 0;
             }
             left++;
             right++;
         }
 
-        // 求一个数组里面的最大两个数字之间的最大和
+        if(sum > max) {
+            max2 = max;
+            max = sum;
+        } else if(sum > max2) {
+            max2 = sum;
+        }
 
-        return 0;
+        return max + max2;
     }
 }
