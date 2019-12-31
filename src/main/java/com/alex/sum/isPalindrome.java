@@ -30,7 +30,9 @@ package com.alex.sum;
 public class isPalindrome {
 
     public static void main(String[] args) {
-        System.out.println(isPalindrome2(10));
+
+        System.out.println(Math.floor(-8.5));
+//        System.out.println(10^9 > 2 ^ 31);
     }
 
     /**
