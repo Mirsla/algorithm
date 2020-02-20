@@ -89,7 +89,7 @@ public class Solution {
      * 输入: [1,3,5,6], 0
      * 输出: 0
      */
-    public int searchInsert(int[] nums, int target) {
+    public  int searchInsert(int[] nums, int target) {
         for(int i = 0; i < nums.length; i++) {
             if(nums[i] >= target) {
                 return i;
@@ -97,5 +97,7 @@ public class Solution {
         }
 
         return nums.length;
+
+
     }
 }
