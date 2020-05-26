@@ -2,7 +2,7 @@ package com.alex.string;
 
 /**
  * description:
- * author: chenshoujiang
+ * author: alex
  * date: 2019/12/31
  */
 public class Solution {
