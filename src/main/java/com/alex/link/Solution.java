@@ -2,7 +2,7 @@ package com.alex.link;
 
 /**
  * description:
- * author: chenshoujiang
+ * author: alex
  * date: 2019/12/31
  */
 public class Solution {
